@@ -21,7 +21,7 @@ LimitNOFILE=infinity
 [Install]
 WantedBy=multi-user.target" > /etc/systemd/system/juicity-server.service
 mkdir /usr/local/etc/juicity && touch /usr/local/etc/juicity/server.json
-echo "
+cat >/usr/local/etc/juicity/server.json <<-EOF
 {
     "listen": ":23182",
     "users": {
@@ -31,8 +31,8 @@ echo "
     "private_key": "/path/to/private.key",
     "congestion_control": "bbr",
     "log_level": "info"
-}" > /usr/local/etc/juicity/server.json
+}
+EOF
 systemctl enable juicity-server && systemctl restart juicity-server
 }
-
 _INSTALL
